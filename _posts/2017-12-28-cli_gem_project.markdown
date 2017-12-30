@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "CLI Gem Project"
-date:       2017-12-28 17:57:46 +0000
+date:       2017-12-28 12:57:46 -0500
 permalink:  cli_gem_project
 ---
 
@@ -45,9 +45,65 @@ Category and Student class is there to instantiate the objects and gives access 
 
 The rest of the coding went without major issues actually, and I spent quite a time to get used to using pry and testing with console while doing this projects. 
 
-I will update more once the items below are resolved -
-⋅⋅* `undefined method 'attribute' for nil:NilClass (NoMethodError)`
-⋅⋅* Releasing the gem, so I can use `gem install` 
-⋅⋅* Update README file
+
+Below are the issues that I had at the end - 
+1. `undefined method 'attribute' for nil:NilClass (NoMethodError)`
+
+Below was the wrong code that made me think several hours. 
+
+```
+  def self.scrape_softwares(category)
+    html = open("https://www.capterra.com/#{category.slug}")
+    doc = Nokogiri::HTML(html)
+
+    doc.css(".listing").each do |element|
+      software = SoftwareBinder::Software.new(category)
+      software.name = element.css(".listing-name a").text.strip
+      software.description = element.css(".listing-description").text.strip.gsub(/\s{2,}/,' ').gsub(" Learn more about #{software.name}",'')
+      software.page_slug = element.css(".listing-description a").attr("href").value
+      software.overall_rating = element.css(".reviews").nil? ? element.css(".reviews").attr("data-rating").value.split("/")[0]  : "0.0"
+      software.reviews = element.css(".reviews").nil? ? element.css(".reviews").attr("data-rating").value.split(" - ")[1] : 0
+    end
+	end
+```
+
+Below is the fixed code - I was testing wrong code with pry, and did not use ternary operater properly.
+ 
+```
+   def self.scrape_softwares(category)
+    html = open("https://www.capterra.com/#{category.slug}")
+    doc = Nokogiri::HTML(html)
+
+    doc.css(".listing").each do |element|
+      software = SoftwareBinder::Software.new(category)
+      software.name = element.css(".listing-name a").text.strip
+      software.description = element.css(".listing-description").text.strip.gsub(/\s{2,}/,' ').gsub(" Learn more about #{software.name}",'')
+      software.page_slug = element.css(".listing-description a").attr("href").value
+
+      if !element.css(".reviews").empty?
+        software.overall_rating = element.css(".reviews").attr("data-rating").value.split("/")[0]
+        software.reviews = element.css(".reviews").attr("data-rating").value.split(" - ")[1]
+      else
+        software.overall_rating = "0.0"
+        software.reviews = 0
+      end
+    end
+  end
+```
+
+2. Releasing the gem, so I can use `gem install` 
+With Bundler, I ran`rake build` and `rake release`. Before that, gemspec file needed some adjustment to find the executable file in the right directory. Also, authentication needs attention. running `gem push <pkg name>` might help to make suer that you can push to rubygems.org. `rake release` apparently hits both github and rubygems.
+
+```
+  spec.homepage      = "https://github.com/ylhoony/software-binder-cli-app"
+  spec.license       = "MIT"
+  spec.metadata["allowed_push_host"] = "https://rubygems.org"
+	spec.bindir        = "bin"
+  spec.executables   = "software_binder"
+  spec.require_paths = ["lib"]
+```
+
+
+
 
 
