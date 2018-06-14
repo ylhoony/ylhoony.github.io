@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Scope, Hoisting ,and Arrow functions in JavaScript"
-date:       2018-06-14 23:18:09 +0000
+date:       2018-06-14 19:18:10 -0400
 permalink:  scope_hoisting_and_arrow_functions_in_javascript
 ---
 
