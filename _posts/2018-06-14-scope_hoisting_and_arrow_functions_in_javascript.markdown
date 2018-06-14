@@ -23,7 +23,7 @@ bonus();
 ```
 
 
-### What did I miss?
+## What did I miss?
 
 When use `var`,
 The main part I missed was Variable Declaration and Variable Initialization. 
@@ -49,7 +49,7 @@ Flow of the code above look like below:
 **Below are the summary of the Scope and Hoisting.**
 
 
-### Scope in JavaScript
+## Scope in JavaScript
 
 According to MDN, Scope is the **current** context of execution (execution context).
 The context in which values and expressions are "**visible**," or **can be referenced.** 
@@ -61,7 +61,7 @@ Simply, scope determines what variables or functions we can access inside/outsid
 So, what is the execution context, then? 
 
 
-#### Execution Context
+### Execution Context
 
 The execution context is not exactly the same as the scope. 
 
@@ -118,7 +118,7 @@ Here is good summary of each variable declaration keywords -
 
 
 
-##### `var`
+#### `var`
 
 When you declare variable with keyword `var`, variable declaration will be hoisted wherever they occur, again, initialization is not hoisted.
 
@@ -155,7 +155,7 @@ Assigning a value to an undeclared variable implicitly creates it as a global va
 ```
 
 
-#### `const` - Constants
+### `const` - Constants
 
 Declaring a variable with `const` keyword creates a constant those value cannot change through re-assignment, and it can't be redeclared. 
 Scope of the `const` can be either global or function or local to the **block**.
@@ -194,7 +194,7 @@ x();
 This example is slightly different from previous one, using same variable name inside/outside `if` statement.  They stay in their own scope and returns the value. 
 
 
-#### `let`
+### `let`
 
 The `let` keyword declares a block scope local variable, optionally initializing it to a value.
 Similar to `const` keyword, only difference is you can reassign the value to the variable.
@@ -216,14 +216,14 @@ function letTest() {
 The example above shows the value reassignment and how block scope returns the value. 
 
 
-### Hoisting
+## Hoisting
 
 Hoisting is that 
 ```
 the variable and function declarations are put into memory during the compile phase, but stay exactly where you typed them in your coding.
 ```
 
-#### Function Hoisting
+### Function Hoisting
 
 One of the advantages of JavaScript putting function declarations into memory before it executes any code segment is that it allows you to use a function before you declare it in your code. 
 
@@ -268,7 +268,7 @@ const catName = (name) => {
 ```
 
 
-#### `var`iable Hoisting
+### `var`iable Hoisting
 
 Again, when you use `var`, variable declaration is hoisted - as it appears that the variable declaration is moved to the top of the function or global code. This also means that a variable can appear to be used before it's declared. 
 
@@ -300,7 +300,7 @@ These function expressions are best suited for non-method functions, and they ca
 ```
 
 
-#### shorter functions
+### shorter functions
 
 Arrow functions are shorter than regular function expressions, and also **anonymous**.
 Below is one example - 
@@ -328,7 +328,7 @@ const square = (n => n * n);
 ```
 
 
-#### Return key word
+### Return key word
 Arrow function expressions return the result of the expression. So, `return` keyword is optional .
 ```
 var multiply = (a, b) => a * b // returns the result
@@ -340,7 +340,7 @@ Whenever we wrap the function block body `{  }`, `return` keyword is required.
 
 
 
-#### non-binding of this
+### non-binding of this
 
 When a function is invoked from another function, the context or this value is global.
 However, you don’t need to create `self = this` closures or use `bind(this)` with arrow function expression since it allows you to retain the scope of the caller inside the function.
@@ -393,7 +393,7 @@ c. updated `greet` function with arrow function expression which retains the sco
 
 
 
-##### References: 
+**References: **
 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions#Function_scope
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var#var_hoisting
