@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Final Project with React and Redux"
-date:       2018-08-14 02:40:31 +0000
+date:       2018-08-13 22:40:32 -0400
 permalink:  final_project_with_react_and_redux
 ---
 
@@ -76,8 +76,7 @@ export default connect(
 
 
 2. Data Loading with Redux
-I still have to figure out the data loading issues when calling multiple datas, since there is timing problem. 
-However, when there are small number of calls, it worked perfect by setting up the different action type status and loading status.
+I wanted to display the loading bar, and I added loading status with multiple steps within one action.
 For example, I set up action type: "GET_CURRENT_ACCOUNT_BEGIN" and "GET_CURRENT_ACCOUNT_SUCCESS".
 In reducer, those action types updates `currentAccountLoading` status. 
 When it begins, `currentAccountLoading`  is true, in React redering, there is condition for this to render `<Loading />` view. Then, when `currentAccountLoading` becomes false by the execution of "GET_CURRENT_ACCOUNT_SUCCESS", it renders page with actual data.
